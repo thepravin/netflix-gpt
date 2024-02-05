@@ -1,0 +1,19 @@
+
+# Features
+
+- Login/SignUp Page
+    - Sign In / Sign up Form
+    - redicrect to Browse Page
+
+- Brose ( after authentication)
+        - Header
+        - Main Movie
+                - Trailer in Background
+                - Title & Discription
+                - Movie Suggestions
+                     - Movie List * N
+
+
+- Netflix GPT
+    - Search Bar
+    - Movie Suggestions
