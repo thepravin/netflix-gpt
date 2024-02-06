@@ -23,13 +23,13 @@ const appRouter = createBrowserRouter([
 const Body = () => {
 const dispatch = useDispatch();
 
-
+// because : use only first time rendering
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {    
         // login >> store his information into store
-        const {uid,email,displayName} = user;
-        dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+        const {uid,email,displayName,photoURL} = user;
+        dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
         
       } else {
           // logout >> remove information from store
@@ -37,6 +37,10 @@ const dispatch = useDispatch();
       }
     });
   }, []);
+
+
+
+
   return (
     <>
       <RouterProvider router={appRouter} />
