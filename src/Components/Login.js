@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { Link, useNavigate } from "react-router-dom";
 import { checkValidData } from "../utils/validation";
 import {
   createUserWithEmailAndPassword,
@@ -10,11 +9,12 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BAGROUND } from "../utils/constatnts";
 
 const Login = () => {
   const [isSignInForm, setisSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const naviGate = useNavigate();
+  
   const dispatch = useDispatch();
 
   // taking value
@@ -49,7 +49,7 @@ const Login = () => {
             .then(() => {
               const {uid,email,displayName,photoURL} = auth.currentUser;
         dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-              naviGate("/browse");
+              
             })
             .catch((error) => {
               console.log(error);
@@ -69,8 +69,8 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          naviGate("/browse");
-          console.log(user);
+        
+         // console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -86,7 +86,7 @@ const Login = () => {
         <Header />
         <div className="absolute">
           <img
-            src="https://assets.nflxext.com/ffe/siteui/vlv3/4da5d2b1-1b22-498d-90c0-4d86701dffcc/98a1cb1e-5a1d-4b98-a46f-995272b632dd/IN-en-20240129-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+            src={BAGROUND}
             alt="baground"
           />
         </div>
