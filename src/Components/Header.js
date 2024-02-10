@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/constatnts";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,9 +20,13 @@ const Header = () => {
       });
   };
 
+  const handleGPTToggle = ()=>{
+    dispatch(toggleGptSearchView());
+  }
+
   // because : use only first time rendering
   useEffect(() => {
-   const unsubscribe =  onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // login >> store his information into store
         const { uid, email, displayName, photoURL } = user;
@@ -41,27 +46,26 @@ const Header = () => {
       }
     });
 
-
     // unsubscribe when component unmounts >> onAuth Callback
-    return ()=>unsubscribe();
-    
-
+    return () => unsubscribe();
   }, []);
 
   return (
     <>
       <div className=" w-full absolute p-4 py-2 bg-gradient-to-b from-black z-20 flex justify-between">
-        <img
-          className="w-44 "
-          alt="logo"
-          src={LOGO}
-        />
+        <img className="w-44 " alt="logo" src={LOGO} />
         {user && (
           <div className="p-4 flex gap-4 justify-center ">
             <h1 className="text-2xl text-white font-bold">
-              {" "}
               Hellow, {user.displayName}...
             </h1>
+            <button
+              type="button"
+              onClick={handleGPTToggle}
+              className="text-white bg-green-500 hover:opacity-80  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-500"
+            >
+              GPT Search
+            </button>
             <button
               type="button"
               onClick={handleSignOut}

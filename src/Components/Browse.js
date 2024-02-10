@@ -1,12 +1,15 @@
-import React from 'react'
-import Header from './Header'
-import useNewPlayingMovies from '../Hook/useNewPlayingMovies';
-import MainContainer from './MainContainer';
-import SecondaryContainer from './SecondaryContainer';
-import usePopularMovies from '../Hook/usePopularMovies';
-import useTrandingMovies from '../Hook/useTrandingMovies'
+import React from "react";
+import Header from "./Header";
+import useNewPlayingMovies from "../Hook/useNewPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
+import usePopularMovies from "../Hook/usePopularMovies";
+import useTrandingMovies from "../Hook/useTrandingMovies";
+import GptSearch from "./GptSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
+  const toggleGpt = useSelector((store) => store.gpt.showGptSearch);
 
   // api calling
   useNewPlayingMovies();
@@ -16,9 +19,16 @@ const Browse = () => {
   return (
     <>
       <div>
-        <Header/>
-        <MainContainer/>
-        <SecondaryContainer/>
+        <Header />
+        {toggleGpt ? (
+          <GptSearch />
+        ) : (
+          <>            
+            <MainContainer />
+            <SecondaryContainer />
+          </>
+        )}
+
         {/* 
           MainContainer
             - videoBackground
@@ -30,7 +40,7 @@ const Browse = () => {
          */}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Browse
+export default Browse;
