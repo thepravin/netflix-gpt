@@ -12,6 +12,8 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const showLanguage = useSelector((store) => store.gpt.showGptSearch);
+  const showButton = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     return signOut(auth)
@@ -25,9 +27,9 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
-  const handleLanguage = (event)=>{
-   dispatch(changeLang(event.target.value))
-  }
+  const handleLanguage = (event) => {
+    dispatch(changeLang(event.target.value));
+  };
 
   // because : use only first time rendering
   useEffect(() => {
@@ -61,23 +63,27 @@ const Header = () => {
         <img className="w-44 " alt="logo" src={LOGO} />
         {user && (
           <div className="p-4 flex gap-4 justify-center ">
-          <h1 className="text-2xl text-white font-bold mt-2">
+            <h1 className="text-2xl text-white font-bold mt-2">
               Hellow, {user.displayName}...
             </h1>
-            <select className="p-2 m-2 bg-gray-900 text-white " onClick={handleLanguage}>
-              {LANGUAGE_SUPPORT.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier}>
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-
+            {showLanguage && (
+              <select
+                className="p-2 m-2 bg-gray-900 text-white "
+                onClick={handleLanguage}
+              >
+                {LANGUAGE_SUPPORT.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            )}
             <button
               type="button"
               onClick={handleGPTToggle}
               className="text-white bg-green-500 hover:opacity-80  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-500"
             >
-              GPT Search
+              {showButton ? "Home Page" : "GPT Search"}
             </button>
             <button
               type="button"
@@ -86,7 +92,6 @@ const Header = () => {
             >
               Sign Out
             </button>
-           
           </div>
         )}
       </div>
