@@ -4,8 +4,9 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO } from "../utils/constatnts";
+import { LANGUAGE_SUPPORT, LOGO } from "../utils/constatnts";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLang } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,8 +21,12 @@ const Header = () => {
       });
   };
 
-  const handleGPTToggle = ()=>{
+  const handleGPTToggle = () => {
     dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguage = (event)=>{
+   dispatch(changeLang(event.target.value))
   }
 
   // because : use only first time rendering
@@ -56,9 +61,17 @@ const Header = () => {
         <img className="w-44 " alt="logo" src={LOGO} />
         {user && (
           <div className="p-4 flex gap-4 justify-center ">
-            <h1 className="text-2xl text-white font-bold">
+          <h1 className="text-2xl text-white font-bold mt-2">
               Hellow, {user.displayName}...
             </h1>
+            <select className="p-2 m-2 bg-gray-900 text-white " onClick={handleLanguage}>
+              {LANGUAGE_SUPPORT.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+
             <button
               type="button"
               onClick={handleGPTToggle}
@@ -73,6 +86,7 @@ const Header = () => {
             >
               Sign Out
             </button>
+           
           </div>
         )}
       </div>

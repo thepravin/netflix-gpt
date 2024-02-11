@@ -20,3 +20,13 @@ export const API_TOKEN =
 
 
   export const IMG_URL_CDN = "https://image.tmdb.org/t/p/w500/"
+
+
+
+ export const LANGUAGE_SUPPORT = [
+    {identifier:"en",name:"English"},
+    {identifier:"hindi",name:"Hindi"},
+    {identifier:"spanish",name:"Spanish"},
+  ]
+
+  
