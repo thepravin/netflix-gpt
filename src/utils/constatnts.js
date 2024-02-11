@@ -29,4 +29,4 @@ export const API_TOKEN =
     {identifier:"spanish",name:"Spanish"},
   ]
 
-  
+  export const OPENAI_KEY = "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";
