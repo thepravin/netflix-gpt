@@ -60,8 +60,8 @@ const Header = () => {
 
   return (
     <>
-      <div className=" w-full absolute p-4 py-2 bg-gradient-to-b from-black z-20 flex justify-between">
-        <img className="w-44 " alt="logo" src={LOGO} />
+      <div className=" w-full absolute p-4 py-2 bg-gradient-to-b from-black z-20 flex flex-col md:flex-row justify-between ">
+        <img className="w-44 mx-auto md:mx-0" alt="logo" src={LOGO} />
         {user && (
           <div className="p-4 flex gap-4 justify-center ">
             <h1 className="text-2xl text-white font-bold mt-2">
